@@ -3,19 +3,13 @@ import PostList from '@/components/List/PostList'
 import NewsletterForm from '@/components/NewsletterForm'
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
+import getPosts from 'api/posts/getPosts'
+import { NextPage } from 'next'
 import { PostListItem } from 'types/Post'
 
 const MAX_DISPLAY = 5
 
-export async function getStaticProps() {
-  const data = await fetch('http://localhost:3000/api/posts')
-  const posts = await data.json()
-
-  return { props: { posts } }
-}
-
-export default function Home({ posts = [] }: { posts: PostListItem[] }) {
-  console.log(posts)
+const Home: NextPage<{ posts: PostListItem[] }> = ({ posts = [] }) => {
   return (
     <>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
@@ -49,3 +43,10 @@ export default function Home({ posts = [] }: { posts: PostListItem[] }) {
     </>
   )
 }
+
+Home.getInitialProps = async () => {
+  const posts = await getPosts()
+  return { posts }
+}
+
+export default Home
