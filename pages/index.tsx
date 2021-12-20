@@ -3,7 +3,7 @@ import PostList from '@/components/List/PostList'
 import NewsletterForm from '@/components/NewsletterForm'
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
-import getPosts from 'api/posts/getPosts'
+import getPosts from '@/lib/api/posts/getPosts'
 import { NextPage } from 'next'
 import { PostListItem } from 'types/Post'
 
