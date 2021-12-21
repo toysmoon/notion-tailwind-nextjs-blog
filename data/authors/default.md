@@ -1,12 +1,12 @@
 ---
-name: Tails Azimuth
-avatar: /static/images/avatar.png
-occupation: Professor of Atmospheric Science
-company: Stanford University
-email: address@yoursite.com
-twitter: https://twitter.com/Twitter
-linkedin: https://www.linkedin.com
-github: https://github.com
+name: Sungjung Jo
+avatar: /static/images/profile.jpeg
+occupation: Frontend developer
+company: kakaopay
+email: toysmoon@gmail.com
+twitter: https://twitter.com/toysmoon
+linkedin: https://www.linkedin.com/in/sungjungjo/
+github: https://github.com/toysmoon
 ---
 
 Tails Azimuth is a professor of atmospheric sciences at the Stanford AI Lab. His research interests includes complexity modelling of tailwinds, headwinds and crosswinds.

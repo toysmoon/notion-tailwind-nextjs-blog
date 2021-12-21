@@ -15,7 +15,40 @@ class Notion {
   }
 
   get posts() {
-    return this.client.databases.query({ database_id: this.databaseId }).then(getPosts)
+    return this.client.databases
+      .query({
+        database_id: this.databaseId,
+        filter: {
+          property: 'published',
+          checkbox: {
+            equals: true,
+          },
+        },
+        sorts: [
+          {
+            timestamp: 'created_time',
+            direction: 'descending',
+          },
+        ],
+      })
+      .then(getPosts)
+  }
+
+  get tags() {
+    return this.posts
+      .then((posts) => posts.map((post) => post.tags))
+      .then((tags) => tags.reduce((pre, tag) => [...pre, ...tag], []))
+      .then(getTagsCount)
+      .then((tags) => tags.sort((a, b) => a.count - b.count))
+  }
+
+  public async getPage(slug: string) {
+    const [page, blocks] = await Promise.all([
+      this.client.blocks.retrieve({ block_id: slug }),
+      this.client.blocks.children.list({ block_id: slug }),
+    ])
+
+    return { page, blocks }
   }
 }
 
@@ -47,4 +80,16 @@ function getPlainProperties(properties: any) {
   }
 
   return result
+}
+
+function getTagsCount(tags: string[]) {
+  return tags.reduce<{ label: string; count: number }[]>((result, label) => {
+    const tag = result.find((t) => t.label === label)
+    if (!tag) {
+      return [...result, { label, count: 1 }]
+    }
+
+    tag.count++
+    return result
+  }, [])
 }
