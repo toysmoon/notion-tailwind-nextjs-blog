@@ -20,7 +20,10 @@ function PostItem({ post }: { post: PostListItem }) {
             <div className="space-y-6">
               <div>
                 <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                  <Link href={`/notion/${slug}`} className="text-gray-900 dark:text-gray-100">
+                  <Link
+                    href={`/notion/${slug}`}
+                    className="text-gray-900 dark:text-gray-100"
+                  >
                     {title}
                   </Link>
                 </h2>
@@ -30,7 +33,9 @@ function PostItem({ post }: { post: PostListItem }) {
                   ))}
                 </div>
               </div>
-              <div className="prose text-gray-500 max-w-none dark:text-gray-400">{summary}</div>
+              <div className="prose text-gray-500 max-w-none dark:text-gray-400">
+                {summary}
+              </div>
             </div>
             <div className="text-base font-medium leading-6">
               <Link

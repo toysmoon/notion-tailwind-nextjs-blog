@@ -16,7 +16,6 @@ export default function getPosts() {
 
 function getPostsFromData(database: QueryDatabaseResponse): PostListItem[] {
   const posts = database.results as any[]
-
   return posts.map((page) => {
     const properties = getPlainProperties(page.properties)
     return {

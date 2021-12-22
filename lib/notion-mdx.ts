@@ -21,13 +21,13 @@ function getMDXFromBlock(block: Block) {
 
   switch (type) {
     case BLOCK_TYPE.HEADING_1:
-      return `# ${text}`
+      return `# ${text}\n`
     case BLOCK_TYPE.HEADING_2:
-      return `## ${text}`
+      return `## ${text}\n`
     case BLOCK_TYPE.HEADING_3:
-      return `### ${text}`
+      return `### ${text}\n`
     case BLOCK_TYPE.PARAGRAPH:
-      return `${text}`
+      return `${text}\n`
     default:
       return ''
   }

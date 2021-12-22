@@ -5,7 +5,9 @@ export default function PostList({ posts }: { posts: PostListItem[] }) {
   const listClassName = 'divide-y divide-gray-200 dark:divide-gray-700'
 
   if (!posts.length) {
-    return <ul className={listClassName}>{!posts.length && 'No posts found.'}</ul>
+    return (
+      <ul className={listClassName}>{!posts.length && 'No posts found.'}</ul>
+    )
   }
 
   return (
