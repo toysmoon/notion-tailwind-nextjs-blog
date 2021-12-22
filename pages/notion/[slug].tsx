@@ -32,7 +32,7 @@ export async function getStaticProps({ params }: { params: { slug: string } }) {
 
   return {
     props: { post, notion, content },
-    revalidate: 10,
+    revalidate: 60,
   }
 }
 
@@ -43,7 +43,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true,
+    fallback: 'blocking',
   }
 }
 
