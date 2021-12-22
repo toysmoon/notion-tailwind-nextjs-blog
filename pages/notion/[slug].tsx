@@ -3,7 +3,7 @@ import { getNotionPage } from '@/lib/mdx'
 import { notionContentToMDX } from '@/lib/notion-mdx'
 import getPostBySlug from '@/lib/notion/getPostBySlug'
 import getPosts from '@/lib/notion/getPosts'
-import { NextPage } from 'next'
+import { GetStaticPaths, NextPage } from 'next'
 
 const Post: NextPage<any> = ({ notion }) => {
   const { frontMatter, toc, mdxSource } = notion
@@ -32,14 +32,14 @@ export async function getStaticProps({ params }: { params: { slug: string } }) {
   }
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await getPosts().then((posts) =>
     posts.map(({ slug }) => ({ params: { slug } }))
   )
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   }
 }
 
