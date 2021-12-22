@@ -11,6 +11,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const posts = await notion.posts
     return res.json(posts)
   } catch (error) {
+    console.log(error)
     return res.status(500).json(error)
   }
 }

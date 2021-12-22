@@ -60,12 +60,11 @@ function getPosts(database: QueryDatabaseResponse): PostListItem[] {
 
   return posts.map((page) => {
     const properties = getPlainProperties(page.properties)
-
     return {
       slug: page.id,
       date: page.created_time,
-      title: properties.Name.plain_text,
-      summary: properties.summary.plain_text,
+      title: properties.Name?.plain_text,
+      summary: properties.summary?.plain_text,
       tags: properties.tags.map((tag: Tag) => tag.name),
     }
   })
@@ -76,7 +75,11 @@ function getPlainProperties(properties: any) {
   for (const key in properties) {
     const property = properties[key]
     const type = property.type
-    result[key] = property[type].length === 1 ? property[type][0] : property[type]
+    if (type === 'multi_select') {
+      result[key] = property[type] ?? []
+    } else {
+      result[key] = property[type][0]
+    }
   }
 
   return result
