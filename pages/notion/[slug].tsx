@@ -7,7 +7,6 @@ import { NextPage } from 'next'
 
 const Post: NextPage<any> = ({ notion }) => {
   const { frontMatter, toc, mdxSource } = notion
-  return <div>1234</div>
   return (
     <MDXLayoutRenderer
       layout={'PostLayout'}
