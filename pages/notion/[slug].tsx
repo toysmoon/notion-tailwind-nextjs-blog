@@ -6,6 +6,10 @@ import getPosts from '@/lib/notion/getPosts'
 import { GetStaticPaths, NextPage } from 'next'
 
 const Post: NextPage<any> = ({ notion }) => {
+  if (!notion) {
+    return <div>Loading...</div>
+  }
+
   const { frontMatter, toc, mdxSource } = notion
   return (
     <MDXLayoutRenderer
