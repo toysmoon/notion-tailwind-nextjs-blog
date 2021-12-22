@@ -3,7 +3,7 @@ import PostList from '@/components/List/PostList'
 import NewsletterForm from '@/components/NewsletterForm'
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
-import getPosts from '@/lib/api/posts/getPosts'
+import notion from '@/lib/api/notion'
 import { NextPage } from 'next'
 import { PostListItem } from 'types/Post'
 
@@ -41,9 +41,14 @@ const Home: NextPage<{ posts: PostListItem[] }> = ({ posts = [] }) => {
   )
 }
 
-Home.getInitialProps = async () => {
-  const posts = await getPosts()
-  return { posts }
+export async function getStaticProps() {
+  const posts = await notion.posts
+  return {
+    props: {
+      posts,
+    },
+    revalidate: 10,
+  }
 }
 
 export default Home

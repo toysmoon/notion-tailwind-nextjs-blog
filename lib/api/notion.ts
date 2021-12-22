@@ -64,7 +64,7 @@ function getPosts(database: QueryDatabaseResponse): PostListItem[] {
       slug: page.id,
       date: page.created_time,
       title: properties.Name?.plain_text,
-      summary: properties.summary?.plain_text,
+      summary: properties.summary?.plain_text ?? null,
       tags: properties.tags.map((tag: Tag) => tag.name),
     }
   })
